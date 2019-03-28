@@ -13,7 +13,7 @@ import NotFound from "../NotFound";
 
 import { PageHeader } from "../Shared";
 
-import { cardIssuerActions } from "./actions/cardissuers.actions";
+import { cardIssuerActions } from "./actions/candidates.actions";
 
 export class ManageCardIssuers extends Component {
   componentDidMount() {

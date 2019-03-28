@@ -1,5 +1,5 @@
 import { cardIssuersConstants } from "../constants/action.constants";
-import { cardIssuerService } from "../services/cardissuers.service";
+import { cardIssuerService } from "../services/candidates.service";
 import { alertActions } from "../../Alert/actions/alert.actions";
 import { message, routeConstants } from "../../../_constants";
 import { history } from "../../../_utils";
