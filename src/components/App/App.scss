@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700");
+
+.App {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #747474;
+  display: flex;
+  width: 100%;
+}
+
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+  .content-wrapper {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #ccc;
+    .item-count {
+      font-size: 1rem;
+      font-weight: bold;
+      padding-top: 0.5rem;
+    }
+  }
+}
