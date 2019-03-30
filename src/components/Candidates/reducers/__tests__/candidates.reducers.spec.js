@@ -1,5 +1,5 @@
-import { cardIssuers } from "../cardissuer.reducers";
-import { cardIssuersConstants } from "../../constants/action.constants";
+import { candidates } from "../candidates.reducers";
+import { candidateConstants } from "../../constants/action.constants";
 
 const initialState = {
   fetching: false,
@@ -8,21 +8,23 @@ const initialState = {
   error: null
 };
 
-describe("card issuers reducer", () => {
+describe("candidates reducer", () => {
   it("should return the initial state", () => {
-    expect(cardIssuers(undefined, {})).toEqual(initialState);
+    expect(candidates(undefined, {})).toEqual(initialState);
   });
 
-  it("should handle GET_CARDISSUERS_RESET", () => {
-    expect(cardIssuers(initialState, {
-      type: cardIssuersConstants.GET_CARDISSUERS_RESET
-    })).toEqual(initialState);
-  });
-
-  it("should handle GET_CARDISSUERS_REQUEST", () => {
+  it("should handle GET_CANDIDATE_RESET", () => {
     expect(
-      cardIssuers(initialState, {
-        type: cardIssuersConstants.GET_CARDISSUERS_REQUEST
+      candidates(initialState, {
+        type: candidateConstants.GET_CANDIDATE_RESET
+      })
+    ).toEqual(initialState);
+  });
+
+  it("should handle GET_CANDIDATE_REQUEST", () => {
+    expect(
+      candidates(initialState, {
+        type: candidateConstants.GET_CANDIDATE_REQUEST
       })
     ).toEqual({
       ...initialState,
@@ -30,28 +32,28 @@ describe("card issuers reducer", () => {
     });
   });
 
-  it("should handle GET_CARDISSUERS_SUCCESS", () => {
+  it("should handle GET_CANDIDATE_SUCCESS", () => {
     expect(
-      cardIssuers(initialState, {
-        type: cardIssuersConstants.GET_CARDISSUERS_SUCCESS,
-        response: {data:[]}
+      candidates(initialState, {
+        type: candidateConstants.GET_CANDIDATE_SUCCESS,
+        response: { data: [] }
       })
     ).toEqual({
       ...initialState,
-      response:{data:[]},
+      response: { data: [] },
       fetched: true
     });
   });
 
-  it("should handle GET_CARDISSUERS_ERROR", () => {
+  it("should handle GET_CANDIDATE_FAILURE", () => {
     expect(
-      cardIssuers(initialState, {
-        type: cardIssuersConstants.GET_CARDISSUERS_FAILURE,
-        error: {data:[]}
+      candidates(initialState, {
+        type: candidateConstants.GET_CANDIDATE_FAILURE,
+        error: { data: [] }
       })
     ).toEqual({
       ...initialState,
-      error:{data:[]},
+      error: { data: [] }
     });
   });
 });

@@ -7,20 +7,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import CardIssuersList from "./List";
-import CardIssuerForm from "./Form";
-import CardIssuer from "./View";
 import NotFound from "../NotFound";
 
 import { PageHeader } from "../Shared";
 
-import { cardIssuerActions } from "./actions/candidates.actions";
+import { candidateActions } from "./actions/candidates.actions";
 
 export class ManageCardIssuers extends Component {
   componentDidMount() {
-    this.getCardIssuers();
+    this.getCandidates();
   }
 
-  getCardIssuers = () => {
+  getCandidates = () => {
     this.props.getCardIssuers();
   };
 
@@ -28,10 +26,10 @@ export class ManageCardIssuers extends Component {
     const { fetching, fetched, response, error, match } = this.props;
 
     return (
-      <div className="CardIssuers">
+      <div className="candidates" id="candidates">
         <Row>
           <Col>
-            <PageHeader pageId="cardissuers" pageTitle="Manage Card Issuers" />
+            <PageHeader pageId="cardissuers" pageTitle="Manage Candidates" />
           </Col>
         </Row>
 
@@ -44,7 +42,7 @@ export class ManageCardIssuers extends Component {
                 <CardIssuersList
                   match={match}
                   data={response}
-                  loadData={this.getCardIssuers}
+                  loadData={this.getCandidates}
                   fetching={fetching}
                   fetched={fetched}
                   error={error}
@@ -57,16 +55,13 @@ export class ManageCardIssuers extends Component {
                 <CardIssuersList
                   match={match}
                   data={response}
-                  loadData={this.getCardIssuers}
+                  loadData={this.getCandidates}
                   fetching={fetching}
                   fetched={fetched}
                   error={error}
                 />
               )}
             />
-            <Route path={`${match.url}/add`} component={CardIssuerForm} />
-            <Route path={`${match.url}/view/:id`} component={CardIssuer} />
-            <Route path={`${match.url}/edit/:id`} component={CardIssuerForm} />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -88,7 +83,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCardIssuers: bindActionCreators(
-      cardIssuerActions.getAllCardIssuers,
+      candidateActions.getAllCardIssuers,
       dispatch
     )
   };

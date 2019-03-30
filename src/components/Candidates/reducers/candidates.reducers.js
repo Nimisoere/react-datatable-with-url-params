@@ -1,4 +1,4 @@
-import { cardIssuersConstants } from "../constants/action.constants";
+import { candidateConstants } from "../constants/action.constants";
 
 const initialState = {
   fetching: false,
@@ -7,14 +7,14 @@ const initialState = {
   error: null
 };
 
-export const cardIssuers = (state = initialState, action) => {
+export const candidates = (state = initialState, action) => {
   switch (action.type) {
-    case cardIssuersConstants.GET_CARDISSUERS_REQUEST:
+    case candidateConstants.GET_CANDIDATE_REQUEST:
       return {
         ...state,
         fetching: true
       };
-    case cardIssuersConstants.GET_CARDISSUERS_SUCCESS:
+    case candidateConstants.GET_CANDIDATE_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -22,14 +22,14 @@ export const cardIssuers = (state = initialState, action) => {
         response: action.response,
         error: null
       };
-    case cardIssuersConstants.GET_CARDISSUERS_FAILURE:
+    case candidateConstants.GET_CANDIDATE_FAILURE:
       return {
         ...state,
         fetching: false,
         fetched: false,
         error: action.error
       };
-    case cardIssuersConstants.GET_CARDISSUERS_RESET:
+    case candidateConstants.GET_CANDIDATE_RESET:
       return {
         ...state,
         ...initialState
