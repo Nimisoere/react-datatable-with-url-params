@@ -16,7 +16,7 @@ describe("async actions", () => {
   });
 
   it("creates GET_CANDIDATE_REQUEST when a request is sent", () => {
-    fetchMock.getOnce(apiUrls.issuers.base, {
+    fetchMock.getOnce(apiUrls.candidates.base, {
       body: { data: [], responseMessage: "success" },
       headers: { "content-type": "application/json" }
     });

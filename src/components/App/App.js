@@ -13,6 +13,9 @@ import { CustomNavBar } from "../CustomNavBar/NavBar";
 
 import { alertActions } from "../Alert/actions/alert.actions";
 
+import { routes } from "../../_constants";
+
+
 export class App extends Component {
   render() {
     return (
@@ -22,13 +25,15 @@ export class App extends Component {
             <CustomNavBar appName={appConstants.appName} />
             <Container>
               <Switch>
-                <Route
-                  key="1"
-                  exact={true}
-                  path="/"
-                  name="Home"
-                  component={() => null}
-                />
+                {routes.map(route => (
+                  <Route
+                    key={route.key}
+                    exact={route.exact}
+                    path={route.path}
+                    name={route.name}
+                    component={route.pageComponent}
+                  />
+                ))}
               </Switch>
             </Container>
           </main>

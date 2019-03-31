@@ -6,20 +6,20 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import CardIssuersList from "./List";
+import { CandidatesList } from "./List";
 import NotFound from "../NotFound";
 
 import { PageHeader } from "../Shared";
 
 import { candidateActions } from "./actions/candidates.actions";
 
-export class ManageCardIssuers extends Component {
+export class ManageCandidates extends Component {
   componentDidMount() {
     this.getCandidates();
   }
 
   getCandidates = () => {
-    this.props.getCardIssuers();
+    this.props.getCandidates();
   };
 
   render() {
@@ -29,7 +29,7 @@ export class ManageCardIssuers extends Component {
       <div className="candidates" id="candidates">
         <Row>
           <Col>
-            <PageHeader pageId="cardissuers" pageTitle="Manage Candidates" />
+            <PageHeader pageId="candidates" pageTitle="Manage Candidates" />
           </Col>
         </Row>
 
@@ -39,7 +39,7 @@ export class ManageCardIssuers extends Component {
               exact
               path={match.url}
               render={() => (
-                <CardIssuersList
+                <CandidatesList
                   match={match}
                   data={response}
                   loadData={this.getCandidates}
@@ -52,7 +52,7 @@ export class ManageCardIssuers extends Component {
             <Route
               path={`${match.url}/list`}
               render={() => (
-                <CardIssuersList
+                <CandidatesList
                   match={match}
                   data={response}
                   loadData={this.getCandidates}
@@ -71,7 +71,7 @@ export class ManageCardIssuers extends Component {
 }
 
 const mapStateToProps = state => {
-  const { fetching, fetched, response, error } = state.cardIssuers;
+  const { fetching, fetched, response, error } = state.candidates;
   return {
     fetching,
     fetched,
@@ -82,8 +82,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCardIssuers: bindActionCreators(
-      candidateActions.getAllCardIssuers,
+    getCandidates: bindActionCreators(
+      candidateActions.getAllCandidates,
       dispatch
     )
   };
@@ -92,4 +92,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ManageCardIssuers);
+)(ManageCandidates);

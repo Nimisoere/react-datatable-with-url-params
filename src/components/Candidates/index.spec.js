@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { ManageCardIssuers } from "./index";
+import { ManageCandidates } from "./index";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -11,10 +11,10 @@ function setup() {
     fetching: false,
     fetched: false,
     response: {},
-    error:{},
-    getCardIssuers: jest.fn()
+    error: {},
+    getCandidates: jest.fn()
   };
-  const enzymeWrapper = shallow(<ManageCardIssuers {...props} />);
+  const enzymeWrapper = shallow(<ManageCandidates {...props} />);
   return {
     props,
     enzymeWrapper
@@ -22,7 +22,7 @@ function setup() {
 }
 
 describe("components", () => {
-  describe("Card Issuer Page", () => {
+  describe("Candidates Page", () => {
     it("should render", () => {
       const { enzymeWrapper } = setup();
       expect(enzymeWrapper).toMatchSnapshot();
