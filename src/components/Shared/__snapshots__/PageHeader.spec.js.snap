@@ -22,52 +22,25 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
+      "children": <Container
+        tag="div"
+      >
         <Seo
           base={false}
           description="Personio Applications"
           title="Personio Applications"
-        />,
+        />
         <h4>
           test
-        </h4>,
-      ],
+        </h4>
+      </Container>,
       "className": "page-header",
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "base": false,
-          "description": "Personio Applications",
-          "title": "Personio Applications",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "test",
-        },
-        "ref": null,
-        "rendered": "test",
-        "type": "h4",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <Seo
@@ -79,7 +52,7 @@ ShallowWrapper {
             test
           </h4>,
         ],
-        "className": "page-header",
+        "tag": "div",
       },
       "ref": null,
       "rendered": Array [
@@ -108,6 +81,77 @@ ShallowWrapper {
           "type": "h4",
         },
       ],
+      "type": [Function],
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <Container
+          tag="div"
+        >
+          <Seo
+            base={false}
+            description="Personio Applications"
+            title="Personio Applications"
+          />
+          <h4>
+            test
+          </h4>
+        </Container>,
+        "className": "page-header",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Seo
+              base={false}
+              description="Personio Applications"
+              title="Personio Applications"
+            />,
+            <h4>
+              test
+            </h4>,
+          ],
+          "tag": "div",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "base": false,
+              "description": "Personio Applications",
+              "title": "Personio Applications",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "test",
+            },
+            "ref": null,
+            "rendered": "test",
+            "type": "h4",
+          },
+        ],
+        "type": [Function],
+      },
       "type": "div",
     },
   ],

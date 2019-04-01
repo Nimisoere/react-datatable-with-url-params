@@ -13,7 +13,18 @@ function getAllApplications() {
     dispatch(request());
     try {
       const response = await applicationsService.getAllApplications();
-      response && dispatch(success(response));
+      if (response && !response.error) {
+        dispatch(success(response));
+      } else {
+        const error = response.error;
+        dispatch(failure(error));
+        dispatch(
+          alertActions.error(
+            error ? error.message : message.GENERIC_ERROR,
+            message.LOAD_APPLICATIONS
+          )
+        );
+      }
     } catch (error) {
       dispatch(failure(error));
       dispatch(

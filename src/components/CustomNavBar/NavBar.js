@@ -2,12 +2,12 @@ import React from "react";
 import { Navbar, NavbarBrand, Container } from "reactstrap";
 import PropTypes from "prop-types";
 import { StyleSheet, css } from "aphrodite";
-
+import logo from "../../_assets/personio_logo.svg";
 export const CustomNavBar = ({ ...props }) => (
   <Navbar className={`${css(styles.navBar)} shadow-sm`} light expand="md">
     <Container>
       <NavbarBrand className="pointer font-weight-bold">
-        {props.appName}
+        <img src={logo} alt={props.appName} height="36" />
       </NavbarBrand>
     </Container>
   </Navbar>

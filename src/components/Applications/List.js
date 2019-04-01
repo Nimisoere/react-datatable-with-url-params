@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import DataTable from "../Shared/DataTable";
 
 export const ApplicationsList = ({ ...props }) => {
-  console.log(props)
   const { fetching, data, loadData, error } = props;
   const dataCount =
     data && data.count ? data.count : data && data.data ? data.data.length : 0;
@@ -51,6 +50,7 @@ export const ApplicationsList = ({ ...props }) => {
         data={data}
         count={dataCount}
         countName="Applications"
+        defaultPageSize="10"
         loadData={loadData}
         error={error}
         bordered={true}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -27,11 +27,7 @@ export class ManageApplications extends Component {
 
     return (
       <div className="applications" id="applications">
-        <Row>
-          <Col>
-            <PageHeader pageId="applications" pageTitle="Manage Applications" />
-          </Col>
-        </Row>
+        <PageHeader pageId="applications" pageTitle="Manage Applications" />
 
         <div className="content-wrapper">
           <Container>

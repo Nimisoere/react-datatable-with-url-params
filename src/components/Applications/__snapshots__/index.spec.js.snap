@@ -38,39 +38,26 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Row
-          tag="div"
-        >
-          <Col
-            tag="div"
-            widths={
-              Array [
-                "xs",
-                "sm",
-                "md",
-                "lg",
-                "xl",
-              ]
-            }
-          >
-            <PageHeader
-              pageId="applications"
-              pageTitle="Manage Applications"
-            />
-          </Col>
-        </Row>,
+        <PageHeader
+          pageId="applications"
+          pageTitle="Manage Applications"
+        />,
         <div
           className="content-wrapper"
         >
-          <Switch>
-            <Route
-              exact={true}
-              render={[Function]}
-            />
-            <Route
-              component={[Function]}
-            />
-          </Switch>
+          <Container
+            tag="div"
+          >
+            <Switch>
+              <Route
+                exact={true}
+                render={[Function]}
+              />
+              <Route
+                component={[Function]}
+              />
+            </Switch>
+          </Container>
         </div>,
       ],
       "className": "applications",
@@ -83,59 +70,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": <Col
-            tag="div"
-            widths={
-              Array [
-                "xs",
-                "sm",
-                "md",
-                "lg",
-                "xl",
-              ]
-            }
-          >
-            <PageHeader
-              pageId="applications"
-              pageTitle="Manage Applications"
-            />
-          </Col>,
-          "tag": "div",
+          "pageId": "applications",
+          "pageTitle": "Manage Applications",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "children": <PageHeader
-              pageId="applications"
-              pageTitle="Manage Applications"
-            />,
-            "tag": "div",
-            "widths": Array [
-              "xs",
-              "sm",
-              "md",
-              "lg",
-              "xl",
-            ],
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "pageId": "applications",
-              "pageTitle": "Manage Applications",
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
+        "rendered": null,
         "type": [Function],
       },
       Object {
@@ -143,97 +82,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <Switch>
-            <Route
-              exact={true}
-              render={[Function]}
-            />
-            <Route
-              component={[Function]}
-            />
-          </Switch>,
-          "className": "content-wrapper",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <Route
-                exact={true}
-                render={[Function]}
-              />,
-              <Route
-                component={[Function]}
-              />,
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "exact": true,
-                "path": undefined,
-                "render": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <Row
+          "children": <Container
             tag="div"
-          >
-            <Col
-              tag="div"
-              widths={
-                Array [
-                  "xs",
-                  "sm",
-                  "md",
-                  "lg",
-                  "xl",
-                ]
-              }
-            >
-              <PageHeader
-                pageId="applications"
-                pageTitle="Manage Applications"
-              />
-            </Col>
-          </Row>,
-          <div
-            className="content-wrapper"
           >
             <Switch>
               <Route
@@ -244,77 +94,14 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>
-          </div>,
-        ],
-        "className": "applications",
-        "id": "applications",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
+          </Container>,
+          "className": "content-wrapper",
+        },
+        "ref": null,
+        "rendered": Object {
           "instance": null,
           "key": undefined,
           "nodeType": "function",
-          "props": Object {
-            "children": <Col
-              tag="div"
-              widths={
-                Array [
-                  "xs",
-                  "sm",
-                  "md",
-                  "lg",
-                  "xl",
-                ]
-              }
-            >
-              <PageHeader
-                pageId="applications"
-                pageTitle="Manage Applications"
-              />
-            </Col>,
-            "tag": "div",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": <PageHeader
-                pageId="applications"
-                pageTitle="Manage Applications"
-              />,
-              "tag": "div",
-              "widths": Array [
-                "xs",
-                "sm",
-                "md",
-                "lg",
-                "xl",
-              ],
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "pageId": "applications",
-                "pageTitle": "Manage Applications",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            "type": [Function],
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
           "props": Object {
             "children": <Switch>
               <Route
@@ -325,7 +112,7 @@ ShallowWrapper {
                 component={[Function]}
               />
             </Switch>,
-            "className": "content-wrapper",
+            "tag": "div",
           },
           "ref": null,
           "rendered": Object {
@@ -370,6 +157,143 @@ ShallowWrapper {
                 "type": [Function],
               },
             ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <PageHeader
+            pageId="applications"
+            pageTitle="Manage Applications"
+          />,
+          <div
+            className="content-wrapper"
+          >
+            <Container
+              tag="div"
+            >
+              <Switch>
+                <Route
+                  exact={true}
+                  render={[Function]}
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>
+            </Container>
+          </div>,
+        ],
+        "className": "applications",
+        "id": "applications",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "pageId": "applications",
+            "pageTitle": "Manage Applications",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Container
+              tag="div"
+            >
+              <Switch>
+                <Route
+                  exact={true}
+                  render={[Function]}
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>
+            </Container>,
+            "className": "content-wrapper",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Switch>
+                <Route
+                  exact={true}
+                  render={[Function]}
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>,
+              "tag": "div",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <Route
+                    exact={true}
+                    render={[Function]}
+                  />,
+                  <Route
+                    component={[Function]}
+                  />,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "exact": true,
+                    "path": undefined,
+                    "render": [Function],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "component": [Function],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
             "type": [Function],
           },
           "type": "div",
