@@ -1,15 +1,15 @@
-import ManageCandidates from "../components/Candidates";
+import ManageApplications from "../components/Applications";
 import NotFound from "../components/NotFound";
 
 export const routeConstants = {
-  HOMEPAGE: {
-    key: "candidates",
-    title: "Candidates",
+  APPLICATIONS: {
+    key: "applications",
+    title: "Applications",
     exact: true,
-    name: "Candidates",
+    name: "Applications",
     path: "/",
     menu: false,
-    pageComponent: ManageCandidates,
+    pageComponent: ManageApplications,
     enabled: true
   },
   NOTFOUND_ROUTE: {

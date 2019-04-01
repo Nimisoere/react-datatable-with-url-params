@@ -3,5 +3,5 @@ export const message = {
   OUTDATED_DATA:
     "The data displayed below might be outdated. Click 'Refresh' to update.",
 
-  LOAD_CANDIDATES: "Load candidates",
+  LOAD_APPLICATIONS: "Load applications",
 };

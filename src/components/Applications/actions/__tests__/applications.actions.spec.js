@@ -1,7 +1,7 @@
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { candidateActions } from "../candidates.actions";
-import { candidateConstants } from "../../constants/action.constants";
+import { applicationActions } from "../applications.actions";
+import { applicationConstants } from "../../constants/action.constants";
 
 import fetchMock from "fetch-mock";
 
@@ -15,29 +15,29 @@ describe("async actions", () => {
     fetchMock.restore();
   });
 
-  it("creates GET_CANDIDATE_REQUEST when a request is sent", () => {
-    fetchMock.getOnce(apiUrls.candidates.base, {
+  it("creates GET_APPLICATION_REQUEST when a request is sent", () => {
+    fetchMock.getOnce(apiUrls.applications.base, {
       body: { data: [], responseMessage: "success" },
       headers: { "content-type": "application/json" }
     });
 
     const expectedActions = [
-      { type: candidateConstants.GET_CANDIDATE_REQUEST },
+      { type: applicationConstants.GET_APPLICATION_REQUEST },
       {
-        type: candidateConstants.GET_CANDIDATE_SUCCESS,
+        type: applicationConstants.GET_APPLICATION_SUCCESS,
         response: { data: [], responseMessage: "success" }
       }
     ];
     const store = mockStore({ todos: [] });
 
-    return store.dispatch(candidateActions.getAllCandidates()).then(() => {
+    return store.dispatch(applicationActions.getAllApplications()).then(() => {
       const actions = store.getActions();
       expect(actions.length).toBe(2);
       expect(actions).toEqual(expectedActions);
     });
   });
-  it(`RESET GET_CANDIDATE_RESET`, () => {
-    const expectedAction = { type: candidateConstants.GET_CANDIDATE_RESET };
-    expect(candidateActions.resetCandidates()).toEqual(expectedAction);
+  it(`RESET GET_APPLICATION_RESET`, () => {
+    const expectedAction = { type: applicationConstants.GET_APPLICATION_RESET };
+    expect(applicationActions.resetApplications()).toEqual(expectedAction);
   });
 });

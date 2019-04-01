@@ -1,3 +1,3 @@
 export const appConstants ={
-    appName: "Personio Candidates"
+    appName: "Personio Applications"
 }

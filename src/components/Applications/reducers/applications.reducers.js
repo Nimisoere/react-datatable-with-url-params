@@ -1,4 +1,4 @@
-import { candidateConstants } from "../constants/action.constants";
+import { applicantConstants } from "../constants/action.constants";
 
 const initialState = {
   fetching: false,
@@ -7,14 +7,14 @@ const initialState = {
   error: null
 };
 
-export const candidates = (state = initialState, action) => {
+export const applicants = (state = initialState, action) => {
   switch (action.type) {
-    case candidateConstants.GET_CANDIDATE_REQUEST:
+    case applicantConstants.GET_APPLICATION_REQUEST:
       return {
         ...state,
         fetching: true
       };
-    case candidateConstants.GET_CANDIDATE_SUCCESS:
+    case applicantConstants.GET_APPLICATION_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -22,14 +22,14 @@ export const candidates = (state = initialState, action) => {
         response: action.response,
         error: null
       };
-    case candidateConstants.GET_CANDIDATE_FAILURE:
+    case applicantConstants.GET_APPLICATION_FAILURE:
       return {
         ...state,
         fetching: false,
         fetched: false,
         error: action.error
       };
-    case candidateConstants.GET_CANDIDATE_RESET:
+    case applicantConstants.GET_APPLICATION_RESET:
       return {
         ...state,
         ...initialState

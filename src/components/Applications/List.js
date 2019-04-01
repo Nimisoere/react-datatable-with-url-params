@@ -8,7 +8,7 @@ import { Spinner } from "../Shared";
 import { message } from "../../_constants";
 import DataTable from "../Shared/DataTable";
 
-export const CandidatesList = ({ ...props }) => {
+export const ApplicationsList = ({ ...props }) => {
   const { fetching, data, loadData, error } = props;
 
   return (
@@ -42,7 +42,7 @@ export const CandidatesList = ({ ...props }) => {
   );
 };
 
-CandidatesList.propTypes = {
+ApplicationsList.propTypes = {
   match: PropTypes.object.isRequired,
   data: PropTypes.object,
   loadData: PropTypes.func,
@@ -51,4 +51,4 @@ CandidatesList.propTypes = {
   error: PropTypes.object
 };
 
-export default CandidatesList;
+export default ApplicationsList;

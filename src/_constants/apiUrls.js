@@ -4,7 +4,7 @@ const apiName = "api";
 const baseUrl = `${hostName}/${apiName}/${apiVersion}`;
 
 export const apiUrls = {
-  candidates: {
+  applications: {
     base: `${baseUrl}/candidates`
   }
 };

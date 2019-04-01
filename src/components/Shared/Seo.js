@@ -1,18 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
+import { appConstants } from "../../_constants";
 
 export const Seo = ({ title, description, base }) => (
   <div>
     {base ? (
-      <Helmet titleTemplate={`%s - ${title}`} defaultTitle="NIMC Wallet Management">
+      <Helmet
+        titleTemplate={`%s - ${title}`}
+        defaultTitle={appConstants.appName}
+      >
         <meta charSet="utf-8" />
-        <title>{title} | NIMC Wallet Management </title>
+        <title>
+          {title} | {appConstants.appName}{" "}
+        </title>
         <meta name="description" content={description} />
       </Helmet>
     ) : (
       <Helmet>
-        <title>{title} | NIMC Wallet Management </title>
+        <title>
+          {title} | {appConstants.appName}{" "}
+        </title>
         <meta name="description" content={description} />
       </Helmet>
     )}
