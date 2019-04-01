@@ -68,10 +68,6 @@ ShallowWrapper {
               render={[Function]}
             />
             <Route
-              path="undefined/list"
-              render={[Function]}
-            />
-            <Route
               component={[Function]}
             />
           </Switch>
@@ -153,10 +149,6 @@ ShallowWrapper {
               render={[Function]}
             />
             <Route
-              path="undefined/list"
-              render={[Function]}
-            />
-            <Route
               component={[Function]}
             />
           </Switch>,
@@ -174,10 +166,6 @@ ShallowWrapper {
                 render={[Function]}
               />,
               <Route
-                path="undefined/list"
-                render={[Function]}
-              />,
-              <Route
                 component={[Function]}
               />,
             ],
@@ -191,18 +179,6 @@ ShallowWrapper {
               "props": Object {
                 "exact": true,
                 "path": undefined,
-                "render": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "path": "undefined/list",
                 "render": [Function],
               },
               "ref": null,
@@ -262,10 +238,6 @@ ShallowWrapper {
             <Switch>
               <Route
                 exact={true}
-                render={[Function]}
-              />
-              <Route
-                path="undefined/list"
                 render={[Function]}
               />
               <Route
@@ -350,10 +322,6 @@ ShallowWrapper {
                 render={[Function]}
               />
               <Route
-                path="undefined/list"
-                render={[Function]}
-              />
-              <Route
                 component={[Function]}
               />
             </Switch>,
@@ -371,10 +339,6 @@ ShallowWrapper {
                   render={[Function]}
                 />,
                 <Route
-                  path="undefined/list"
-                  render={[Function]}
-                />,
-                <Route
                   component={[Function]}
                 />,
               ],
@@ -388,18 +352,6 @@ ShallowWrapper {
                 "props": Object {
                   "exact": true,
                   "path": undefined,
-                  "render": [Function],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "path": "undefined/list",
                   "render": [Function],
                 },
                 "ref": null,

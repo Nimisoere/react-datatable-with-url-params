@@ -1,14 +1,24 @@
 import React from "react";
 import { Navbar, NavbarBrand, Container } from "reactstrap";
 import PropTypes from "prop-types";
+import { StyleSheet, css } from "aphrodite";
 
 export const CustomNavBar = ({ ...props }) => (
-  <Navbar color="white" className="shadow-sm" light expand="md">
+  <Navbar className={`${css(styles.navBar)} shadow-sm`} light expand="md">
     <Container>
-      <NavbarBrand className="pointer font-weight-bold">{props.appName}</NavbarBrand>
+      <NavbarBrand className="pointer font-weight-bold">
+        {props.appName}
+      </NavbarBrand>
     </Container>
   </Navbar>
 );
+
+const styles = StyleSheet.create({
+  navBar: {
+    backgroundColor: "#FFFFFF",
+    zIndex: 1
+  }
+});
 
 Navbar.propTypes = {
   light: PropTypes.bool,

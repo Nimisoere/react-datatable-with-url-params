@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -34,36 +34,25 @@ export class ManageApplications extends Component {
         </Row>
 
         <div className="content-wrapper">
-          <Switch>
-            <Route
-              exact
-              path={match.url}
-              render={() => (
-                <ApplicationsList
-                  match={match}
-                  data={response}
-                  loadData={this.getApplications}
-                  fetching={fetching}
-                  fetched={fetched}
-                  error={error}
-                />
-              )}
-            />
-            <Route
-              path={`${match.url}/list`}
-              render={() => (
-                <ApplicationsList
-                  match={match}
-                  data={response}
-                  loadData={this.getApplications}
-                  fetching={fetching}
-                  fetched={fetched}
-                  error={error}
-                />
-              )}
-            />
-            <Route component={NotFound} />
-          </Switch>
+          <Container>
+            <Switch>
+              <Route
+                exact
+                path={match.url}
+                render={() => (
+                  <ApplicationsList
+                    match={match}
+                    data={response}
+                    loadData={this.getApplications}
+                    fetching={fetching}
+                    fetched={fetched}
+                    error={error}
+                  />
+                )}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Container>
         </div>
       </div>
     );

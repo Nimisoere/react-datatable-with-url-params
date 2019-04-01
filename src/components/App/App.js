@@ -6,7 +6,6 @@ import { appConstants } from "../../_constants";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { Container } from "reactstrap";
 import "./App.scss";
 
 import { CustomNavBar } from "../CustomNavBar/NavBar";
@@ -22,7 +21,7 @@ export class App extends Component {
         <div className="App">
           <main className="main-content">
             <CustomNavBar appName={appConstants.appName} />
-            <Container>
+            <div>
               <Switch>
                 {routes.map(route => (
                   <Route
@@ -34,7 +33,7 @@ export class App extends Component {
                   />
                 ))}
               </Switch>
-            </Container>
+            </div>
           </main>
         </div>
       </Router>
