@@ -1,4 +1,4 @@
-import { applicantConstants } from "../constants/action.constants";
+import { applicationConstants } from "../constants/action.constants";
 
 const initialState = {
   fetching: false,
@@ -7,14 +7,14 @@ const initialState = {
   error: null
 };
 
-export const applicants = (state = initialState, action) => {
+export const applications = (state = initialState, action) => {
   switch (action.type) {
-    case applicantConstants.GET_APPLICATION_REQUEST:
+    case applicationConstants.GET_APPLICATION_REQUEST:
       return {
         ...state,
         fetching: true
       };
-    case applicantConstants.GET_APPLICATION_SUCCESS:
+    case applicationConstants.GET_APPLICATION_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -22,14 +22,14 @@ export const applicants = (state = initialState, action) => {
         response: action.response,
         error: null
       };
-    case applicantConstants.GET_APPLICATION_FAILURE:
+    case applicationConstants.GET_APPLICATION_FAILURE:
       return {
         ...state,
         fetching: false,
         fetched: false,
         error: action.error
       };
-    case applicantConstants.GET_APPLICATION_RESET:
+    case applicationConstants.GET_APPLICATION_RESET:
       return {
         ...state,
         ...initialState
