@@ -15,7 +15,6 @@ import { alertActions } from "../Alert/actions/alert.actions";
 
 import { routes } from "../../_constants";
 
-
 export class App extends Component {
   render() {
     return (
