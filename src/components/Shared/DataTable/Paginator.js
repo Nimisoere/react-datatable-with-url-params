@@ -10,16 +10,24 @@ import {
 import { appConstants } from "../../../_constants/app.constants";
 
 class Paginator extends Component {
-  handlePageNumberChange = () => {
-    return null;
+  handlePageSizeChange = event => {
+    const value = event.target.value;
+    this.props.pageCountChange(Number(value));
   };
 
-  handlePageSizeChange = () => {
-    return null
-  }
+  handlePageNumberChange = event => {
+    const value = event.target.value;
+    this.props.pageNumberChange(value ? Number(value) : "");
+  };
 
   render() {
-    const { pageNumber, numberOfPages, recordsPerPage } = this.props;
+    const {
+      pageNumber,
+      numberOfPages,
+      recordsPerPage,
+      next,
+      prev
+    } = this.props;
 
     return (
       <Row className="paginator mb-3">
@@ -27,7 +35,7 @@ class Paginator extends Component {
           <button
             className="btn btn-brand"
             disabled={pageNumber <= 1}
-            onClick={this.handlePreviousClick}
+            onClick={prev}
           >
             Previous
           </button>
@@ -42,8 +50,8 @@ class Paginator extends Component {
                 <Input
                   value={pageNumber}
                   onChange={this.handlePageNumberChange}
-                  onBlur={this.handleKeyUp}
                   className="text-center"
+                  type="number"
                 />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>of {numberOfPages}</InputGroupText>
@@ -77,7 +85,7 @@ class Paginator extends Component {
           <button
             className="btn btn-brand"
             disabled={pageNumber >= numberOfPages}
-            onClick={this.handleNextClick}
+            onClick={next}
           >
             Next
           </button>
