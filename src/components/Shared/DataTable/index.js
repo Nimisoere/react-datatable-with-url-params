@@ -9,10 +9,15 @@ import Paginator from "./Paginator";
 
 export default class DataTable extends React.Component {
   state = {
+    allData: [],
     pageData: [],
     pageSize: 10,
     pageNumber: 1,
-    numberOfPages: null
+    numberOfPages: null,
+    sort: {
+      column: null,
+      direction: "desc"
+    }
   };
 
   getNumberOfPages = (pageSize, count) => {
@@ -36,7 +41,7 @@ export default class DataTable extends React.Component {
       stateUpdate = { ...stateUpdate, pageData: page };
     }
     if (stateUpdate) {
-      this.setState(stateUpdate);
+      this.setState({ ...stateUpdate, allData: data ? data.data : [] });
     }
   }
 
@@ -62,9 +67,8 @@ export default class DataTable extends React.Component {
         }
       },
       () => {
-        const { pageNumber, pageSize } = this.state;
-        const { data } = this.props;
-        this.updatePage(pageNumber, pageSize, data.data);
+        const { pageNumber, pageSize, allData } = this.state;
+        this.updatePage(pageNumber, pageSize, allData);
       }
     );
   };
@@ -80,9 +84,8 @@ export default class DataTable extends React.Component {
         }
       },
       () => {
-        const { pageNumber, pageSize } = this.state;
-        const { data } = this.props;
-        this.updatePage(pageNumber, pageSize, data.data);
+        const { pageNumber, pageSize, allData } = this.state;
+        this.updatePage(pageNumber, pageSize, allData);
       }
     );
   };
@@ -100,9 +103,8 @@ export default class DataTable extends React.Component {
         }
       },
       () => {
-        const { pageNumber, pageSize } = this.state;
-        const { data } = this.props;
-        this.updatePage(pageNumber, pageSize, data.data);
+        const { pageNumber, pageSize, allData } = this.state;
+        this.updatePage(pageNumber, pageSize, allData);
       }
     );
   };
@@ -117,9 +119,8 @@ export default class DataTable extends React.Component {
           };
         },
         () => {
-          const { pageNumber, pageSize } = this.state;
-          const { data } = this.props;
-          this.updatePage(pageNumber, pageSize, data.data);
+          const { pageNumber, pageSize, allData } = this.state;
+          this.updatePage(pageNumber, pageSize, allData);
         }
       );
     } else if (value >= 1 && value <= this.state.numberOfPages) {
@@ -131,12 +132,64 @@ export default class DataTable extends React.Component {
           };
         },
         () => {
-          const { pageNumber, pageSize } = this.state;
-          const { data } = this.props;
-          this.updatePage(pageNumber, pageSize, data.data);
+          const { pageNumber, pageSize, allData } = this.state;
+          this.updatePage(pageNumber, pageSize, allData);
         }
       );
     }
+  };
+
+  compareValues = (column, order) => {
+    const key = column.accessor;
+    return (a, b) => {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        return 0;
+      }
+
+      let varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+      let varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+      if (column.sortType === "date") {
+        varA = new Date(a[key]);
+        varB = new Date(b[key]);
+      }
+
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return order === "desc" ? comparison * -1 : comparison;
+    };
+  };
+
+  handleSort = column => {
+    const direction = this.state.sort.column
+      ? this.state.sort.direction === "desc"
+        ? "asc"
+        : "desc"
+      : "asc";
+    const sortedData = this.state.allData.sort(
+      this.compareValues(column, direction)
+    );
+
+    this.setState(
+      previousState => {
+        return {
+          ...previousState,
+          allData: sortedData,
+          sort: {
+            column,
+            direction
+          }
+        };
+      },
+      () => {
+        const { pageNumber, pageSize, allData } = this.state;
+        this.updatePage(pageNumber, pageSize, allData);
+      }
+    );
   };
 
   render() {
@@ -144,7 +197,6 @@ export default class DataTable extends React.Component {
       columns,
       loading,
       countName,
-      data,
       count,
       loadData,
       error,
@@ -157,9 +209,16 @@ export default class DataTable extends React.Component {
       defaultPageSize,
       responsive
     } = this.props;
-    const { pageSize, pageNumber, numberOfPages, pageData } = this.state;
-    const pageStart = pageSize * (pageNumber - 1) + 1;
-    const pageEnd = pageSize * pageNumber;
+    const {
+      pageSize,
+      pageNumber,
+      numberOfPages,
+      pageData,
+      sort,
+      allData
+    } = this.state;
+    const pageStart = pageSize * ((pageNumber || 1) - 1) + 1;
+    const pageEnd = pageSize * (pageNumber || 1);
     return (
       <div>
         <Row className="mb-3">
@@ -189,7 +248,7 @@ export default class DataTable extends React.Component {
             </div>
           </Col>
         </Row>
-        {error && data ? (
+        {error && allData ? (
           <Alert color="danger">{message.OUTDATED_DATA}</Alert>
         ) : null}
         <TableComponent
@@ -202,6 +261,8 @@ export default class DataTable extends React.Component {
           striped={striped}
           responsive={responsive}
           size={size}
+          sort={this.handleSort}
+          sortState={sort}
         />
         <Paginator
           recordsPerPage={pageSize || defaultPageSize}

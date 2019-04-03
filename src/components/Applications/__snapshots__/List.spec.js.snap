@@ -41,22 +41,30 @@ ShallowWrapper {
               "name": "Email",
             },
             Object {
+              "Cell": [Function],
               "accessor": "birth_date",
               "name": "Date of Birth / Age",
             },
             Object {
               "accessor": "year_of_experience",
               "name": "Years of experience",
+              "sortType": "number",
+              "sortable": true,
             },
             Object {
               "accessor": "position_applied",
               "name": "Position Applied",
+              "sortType": "default",
+              "sortable": true,
             },
             Object {
               "accessor": "application_date",
               "name": "Application Date",
+              "sortType": "date",
+              "sortable": true,
             },
             Object {
+              "Cell": [Function],
               "accessor": "status",
               "name": "Application Status",
             },
@@ -95,22 +103,30 @@ ShallowWrapper {
             "name": "Email",
           },
           Object {
+            "Cell": [Function],
             "accessor": "birth_date",
             "name": "Date of Birth / Age",
           },
           Object {
             "accessor": "year_of_experience",
             "name": "Years of experience",
+            "sortType": "number",
+            "sortable": true,
           },
           Object {
             "accessor": "position_applied",
             "name": "Position Applied",
+            "sortType": "default",
+            "sortable": true,
           },
           Object {
             "accessor": "application_date",
             "name": "Application Date",
+            "sortType": "date",
+            "sortable": true,
           },
           Object {
+            "Cell": [Function],
             "accessor": "status",
             "name": "Application Status",
           },
@@ -155,22 +171,30 @@ ShallowWrapper {
                 "name": "Email",
               },
               Object {
+                "Cell": [Function],
                 "accessor": "birth_date",
                 "name": "Date of Birth / Age",
               },
               Object {
                 "accessor": "year_of_experience",
                 "name": "Years of experience",
+                "sortType": "number",
+                "sortable": true,
               },
               Object {
                 "accessor": "position_applied",
                 "name": "Position Applied",
+                "sortType": "default",
+                "sortable": true,
               },
               Object {
                 "accessor": "application_date",
                 "name": "Application Date",
+                "sortType": "date",
+                "sortable": true,
               },
               Object {
+                "Cell": [Function],
                 "accessor": "status",
                 "name": "Application Status",
               },
@@ -209,22 +233,30 @@ ShallowWrapper {
               "name": "Email",
             },
             Object {
+              "Cell": [Function],
               "accessor": "birth_date",
               "name": "Date of Birth / Age",
             },
             Object {
               "accessor": "year_of_experience",
               "name": "Years of experience",
+              "sortType": "number",
+              "sortable": true,
             },
             Object {
               "accessor": "position_applied",
               "name": "Position Applied",
+              "sortType": "default",
+              "sortable": true,
             },
             Object {
               "accessor": "application_date",
               "name": "Application Date",
+              "sortType": "date",
+              "sortable": true,
             },
             Object {
+              "Cell": [Function],
               "accessor": "status",
               "name": "Application Status",
             },

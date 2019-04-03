@@ -1,6 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DataTable from "../Shared/DataTable";
+import { MdLens } from "react-icons/md";
+import { appConstants } from "../../_constants";
+const calculateAge = dob => {
+  const today = new Date();
+  const birthDate = new Date(dob);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
 
 export const ApplicationsList = ({ ...props }) => {
   const { fetching, data, loadData, error } = props;
@@ -22,23 +34,58 @@ export const ApplicationsList = ({ ...props }) => {
     },
     {
       name: "Date of Birth / Age",
-      accessor: "birth_date"
+      accessor: "birth_date",
+      Cell: row => {
+        return (
+          <div>
+            {row.birth_date} <strong>({calculateAge(row.birth_date)})</strong>
+          </div>
+        );
+      }
     },
     {
       name: "Years of experience",
-      accessor: "year_of_experience"
+      accessor: "year_of_experience",
+      sortable: true,
     },
     {
       name: "Position Applied",
-      accessor: "position_applied"
+      accessor: "position_applied",
+      sortable: true,
     },
     {
       name: "Application Date",
-      accessor: "application_date"
+      accessor: "application_date",
+      sortable: true,
+      sortType: "date"
     },
     {
       name: "Application Status",
-      accessor: "status"
+      accessor: "status",
+      Cell: row => {
+        switch (row.status) {
+          case appConstants.APPLICATION_STATUS.APPROVED:
+            return (
+              <span>
+                <MdLens className="text-success" /> Approved
+              </span>
+            );
+          case appConstants.APPLICATION_STATUS.REJECTED:
+            return (
+              <span>
+                <MdLens className="text-danger" /> Rejected
+              </span>
+            );
+          case appConstants.APPLICATION_STATUS.WAITING:
+            return (
+              <span>
+                <MdLens className="text-warning" /> Waiting
+              </span>
+            );
+          default:
+            return "foo";
+        }
+      }
     }
   ];
 
