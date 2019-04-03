@@ -1,11 +1,10 @@
 import React from "react";
-import { Row, Col, Alert } from "reactstrap";
-import { MdAutorenew } from "react-icons/md";
-
-import { Spinner } from "../../Shared";
+import { Alert } from "reactstrap";
 import TableComponent from "./Table";
 import { message } from "../../../_constants";
 import Paginator from "./Paginator";
+import { TableHeader } from "./TableHeader";
+import TableFilter from "./TableFilter";
 
 export default class DataTable extends React.Component {
   state = {
@@ -98,7 +97,7 @@ export default class DataTable extends React.Component {
             ...previousState,
             pageNumber: 1,
             pageSize: value,
-            numberOfPages: Math.ceil(Number(this.props.count / value))
+            numberOfPages: Math.ceil(Number(this.state.allData.length / value))
           };
         }
       },
@@ -192,13 +191,48 @@ export default class DataTable extends React.Component {
     );
   };
 
+  cleanObject = obj => {
+    Object.keys(obj).forEach(key => !obj[key] && delete obj[key]);
+    return obj;
+  };
+
+  handleFilter = data => {
+    const filterObject = this.cleanObject(data);
+    const filterKeys = Object.keys(filterObject);
+    const allData = this.props.data ? this.props.data.data : [];
+    const filteredData = allData.filter(row => {
+      return filterKeys.every(eachKey => {
+        if (!filterObject[eachKey].length) {
+          return true;
+        }
+
+        return row[eachKey]
+          .toString()
+          .toLowerCase()
+          .includes(filterObject[eachKey].toString().toLowerCase());
+      });
+    });
+    this.setState(
+      previousState => {
+        return {
+          ...previousState,
+          allData: filteredData,
+          numberOfPages: this.getNumberOfPages(
+            this.state.pageSize,
+            filteredData.length
+          )
+        };
+      },
+      () => {
+        const { pageNumber, pageSize, allData } = this.state;
+        this.updatePage(pageNumber, pageSize, allData);
+      }
+    );
+  };
+
   render() {
     const {
       columns,
-      loading,
-      countName,
-      count,
-      loadData,
       error,
       size,
       bordered,
@@ -207,7 +241,10 @@ export default class DataTable extends React.Component {
       dark,
       hover,
       defaultPageSize,
-      responsive
+      responsive,
+      loading,
+      countName,
+      loadData
     } = this.props;
     const {
       pageSize,
@@ -217,40 +254,23 @@ export default class DataTable extends React.Component {
       sort,
       allData
     } = this.state;
-    const pageStart = pageSize * ((pageNumber || 1) - 1) + 1;
-    const pageEnd = pageSize * (pageNumber || 1);
+    const count = allData.length;
     return (
       <div>
-        <Row className="mb-3">
-          <Col sm="6">
-            <h5 className="item-count">
-              {loading
-                ? `Fetching ${countName}...`
-                : `Showing ${pageStart} to ${pageEnd} of ${count} ${countName ||
-                    "Result(s)"}`}
-            </h5>
-          </Col>
-          <Col sm="6">
-            <div className="text-right">
-              <button
-                disabled={loading}
-                onClick={loadData}
-                className="btn btn-brand"
-              >
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <span>
-                    <MdAutorenew size={20} /> Refresh
-                  </span>
-                )}
-              </button>
-            </div>
-          </Col>
-        </Row>
-        {error && allData ? (
+        <TableHeader
+          pageSize={pageSize}
+          pageNumber={pageNumber}
+          loading={loading}
+          countName={countName}
+          count={count}
+          loadData={loadData}
+        />
+        {error && allData && allData.length ? (
           <Alert color="danger">{message.OUTDATED_DATA}</Alert>
         ) : null}
+
+        <TableFilter filterData={this.handleFilter} columns={columns} />
+
         <TableComponent
           columns={columns}
           data={pageData}
@@ -261,6 +281,7 @@ export default class DataTable extends React.Component {
           striped={striped}
           responsive={responsive}
           size={size}
+          loading={loading}
           sort={this.handleSort}
           sortState={sort}
         />

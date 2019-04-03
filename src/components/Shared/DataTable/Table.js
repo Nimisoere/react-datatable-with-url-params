@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Table } from "reactstrap";
 import { MdSort } from "react-icons/md";
 import { StyleSheet, css } from "aphrodite";
+import { Spinner } from "../Spinner";
 
 export default class TableComponent extends React.Component {
   sort = column => {
@@ -16,6 +17,7 @@ export default class TableComponent extends React.Component {
     const {
       columns,
       data,
+      loading,
       size,
       bordered,
       borderless,
@@ -53,19 +55,26 @@ export default class TableComponent extends React.Component {
       ));
 
     const tableRows =
-      data &&
-      data.map((row, index) => (
-        <tr key={index}>
-          {columns.map((column, index) => {
-            const original = row;
-            const cell = column.Cell
-              ? column.Cell(original)
-              : row[column.accessor];
+      data && data.length ? (
+        data.map((row, index) => (
+          <tr key={index}>
+            {columns.map((column, index) => {
+              const original = row;
+              const cell = column.Cell
+                ? column.Cell(original)
+                : row[column.accessor];
 
-            return <td key={index}>{cell}</td>;
-          })}
+              return <td key={index}>{cell}</td>;
+            })}
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={columns.length} align="center">
+            {loading ? <Spinner size="10rem" /> : <h4 className="font-weight-bold">No results found</h4>}
+          </td>
         </tr>
-      ));
+      );
     return (
       <Table
         dark={dark}

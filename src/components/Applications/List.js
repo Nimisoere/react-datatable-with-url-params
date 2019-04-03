@@ -26,7 +26,8 @@ export const ApplicationsList = ({ ...props }) => {
     },
     {
       name: "Name",
-      accessor: "name"
+      accessor: "name",
+      filterable: true
     },
     {
       name: "Email",
@@ -46,12 +47,13 @@ export const ApplicationsList = ({ ...props }) => {
     {
       name: "Years of experience",
       accessor: "year_of_experience",
-      sortable: true,
+      sortable: true
     },
     {
       name: "Position Applied",
       accessor: "position_applied",
       sortable: true,
+      filterable: true
     },
     {
       name: "Application Date",
@@ -62,6 +64,12 @@ export const ApplicationsList = ({ ...props }) => {
     {
       name: "Application Status",
       accessor: "status",
+      filterable: true,
+      filterOptions: [
+        {value: appConstants.APPLICATION_STATUS.APPROVED, label: "Approved"},
+        {value: appConstants.APPLICATION_STATUS.WAITING, label: "Waiting"},
+        {value: appConstants.APPLICATION_STATUS.REJECTED, label: "Rejected"}
+      ],
       Cell: row => {
         switch (row.status) {
           case appConstants.APPLICATION_STATUS.APPROVED:

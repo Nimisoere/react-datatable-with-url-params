@@ -34,6 +34,7 @@ ShallowWrapper {
             },
             Object {
               "accessor": "name",
+              "filterable": true,
               "name": "Name",
             },
             Object {
@@ -48,13 +49,12 @@ ShallowWrapper {
             Object {
               "accessor": "year_of_experience",
               "name": "Years of experience",
-              "sortType": "number",
               "sortable": true,
             },
             Object {
               "accessor": "position_applied",
+              "filterable": true,
               "name": "Position Applied",
-              "sortType": "default",
               "sortable": true,
             },
             Object {
@@ -66,6 +66,21 @@ ShallowWrapper {
             Object {
               "Cell": [Function],
               "accessor": "status",
+              "filterOptions": Array [
+                Object {
+                  "label": "Approved",
+                  "value": "approved",
+                },
+                Object {
+                  "label": "Waiting",
+                  "value": "waiting",
+                },
+                Object {
+                  "label": "Rejected",
+                  "value": "rejected",
+                },
+              ],
+              "filterable": true,
               "name": "Application Status",
             },
           ]
@@ -96,6 +111,7 @@ ShallowWrapper {
           },
           Object {
             "accessor": "name",
+            "filterable": true,
             "name": "Name",
           },
           Object {
@@ -110,13 +126,12 @@ ShallowWrapper {
           Object {
             "accessor": "year_of_experience",
             "name": "Years of experience",
-            "sortType": "number",
             "sortable": true,
           },
           Object {
             "accessor": "position_applied",
+            "filterable": true,
             "name": "Position Applied",
-            "sortType": "default",
             "sortable": true,
           },
           Object {
@@ -128,6 +143,21 @@ ShallowWrapper {
           Object {
             "Cell": [Function],
             "accessor": "status",
+            "filterOptions": Array [
+              Object {
+                "label": "Approved",
+                "value": "approved",
+              },
+              Object {
+                "label": "Waiting",
+                "value": "waiting",
+              },
+              Object {
+                "label": "Rejected",
+                "value": "rejected",
+              },
+            ],
+            "filterable": true,
             "name": "Application Status",
           },
         ],
@@ -164,6 +194,7 @@ ShallowWrapper {
               },
               Object {
                 "accessor": "name",
+                "filterable": true,
                 "name": "Name",
               },
               Object {
@@ -178,13 +209,12 @@ ShallowWrapper {
               Object {
                 "accessor": "year_of_experience",
                 "name": "Years of experience",
-                "sortType": "number",
                 "sortable": true,
               },
               Object {
                 "accessor": "position_applied",
+                "filterable": true,
                 "name": "Position Applied",
-                "sortType": "default",
                 "sortable": true,
               },
               Object {
@@ -196,6 +226,21 @@ ShallowWrapper {
               Object {
                 "Cell": [Function],
                 "accessor": "status",
+                "filterOptions": Array [
+                  Object {
+                    "label": "Approved",
+                    "value": "approved",
+                  },
+                  Object {
+                    "label": "Waiting",
+                    "value": "waiting",
+                  },
+                  Object {
+                    "label": "Rejected",
+                    "value": "rejected",
+                  },
+                ],
+                "filterable": true,
                 "name": "Application Status",
               },
             ]
@@ -226,6 +271,7 @@ ShallowWrapper {
             },
             Object {
               "accessor": "name",
+              "filterable": true,
               "name": "Name",
             },
             Object {
@@ -240,13 +286,12 @@ ShallowWrapper {
             Object {
               "accessor": "year_of_experience",
               "name": "Years of experience",
-              "sortType": "number",
               "sortable": true,
             },
             Object {
               "accessor": "position_applied",
+              "filterable": true,
               "name": "Position Applied",
-              "sortType": "default",
               "sortable": true,
             },
             Object {
@@ -258,6 +303,21 @@ ShallowWrapper {
             Object {
               "Cell": [Function],
               "accessor": "status",
+              "filterOptions": Array [
+                Object {
+                  "label": "Approved",
+                  "value": "approved",
+                },
+                Object {
+                  "label": "Waiting",
+                  "value": "waiting",
+                },
+                Object {
+                  "label": "Rejected",
+                  "value": "rejected",
+                },
+              ],
+              "filterable": true,
               "name": "Application Status",
             },
           ],
