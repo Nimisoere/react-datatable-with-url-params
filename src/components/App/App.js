@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { history } from "../../_utils";
 import { appConstants } from "../../_constants";
 
@@ -15,10 +18,26 @@ import { alertActions } from "../Alert/actions/alert.actions";
 import { routes } from "../../_constants";
 
 export class App extends Component {
+  notify = () => {
+    const { type, message, section } = this.props;
+    toast[type || "info"](
+      <div>
+        <p>
+          <span className="bold">{section}:</span> {message}
+        </p>
+      </div>
+    );
+    this.props.clearAlerts();
+  };
   render() {
+    const { message } = this.props;
+    if (message) {
+      this.notify();
+    }
     return (
       <Router history={history}>
         <div className="App">
+          <ToastContainer hideProgressBar autoClose={2000} />
           <main className="main-content">
             <CustomNavBar appName={appConstants.appName} />
             <div>

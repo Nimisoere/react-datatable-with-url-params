@@ -8,6 +8,7 @@ import {
   InputGroupText
 } from "reactstrap";
 import { appConstants } from "../../../_constants/app.constants";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 class Paginator extends Component {
   handlePageSizeChange = event => {
@@ -33,17 +34,18 @@ class Paginator extends Component {
       <Row className="paginator mb-3">
         <Col sm="3">
           <button
-            className="btn btn-brand"
+            className="btn btn-block mb-2 btn-brand"
             disabled={pageNumber <= 1}
             onClick={prev}
           >
+            <MdChevronLeft />
             Previous
           </button>
         </Col>
         <Col sm="6" className="text-center">
           <Row>
-            <Col sm="6">
-              <InputGroup>
+            <Col md="6">
+              <InputGroup className="mb-2">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>Page</InputGroupText>
                 </InputGroupAddon>
@@ -58,8 +60,8 @@ class Paginator extends Component {
                 </InputGroupAddon>
               </InputGroup>
             </Col>
-            <Col sm="6">
-              <InputGroup>
+            <Col md="6">
+              <InputGroup className="mb-2">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>Show</InputGroupText>
                 </InputGroupAddon>
@@ -83,11 +85,12 @@ class Paginator extends Component {
         </Col>
         <Col sm="3" className="text-right">
           <button
-            className="btn btn-brand"
+            className="btn btn-block mb-2 btn-brand"
             disabled={pageNumber >= numberOfPages}
             onClick={next}
           >
             Next
+            <MdChevronRight />
           </button>
         </Col>
       </Row>

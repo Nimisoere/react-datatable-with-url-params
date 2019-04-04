@@ -1,6 +1,5 @@
 import { message } from "../_constants";
 
-
 export const createUrlParams = params => {
   const esc = encodeURIComponent;
   const query = Object.keys(params)
@@ -22,20 +21,14 @@ export const handleResponse = response => {
   }
 
   return response.json().then(json => {
-    const error = new Error(
-      json.message ||
-        json.Message ||
-        json.responseMessage ||
-        json.error ||
-        message.GENERIC_ERROR
-    );
+    const error = new Error(json.message || message.GENERIC_ERROR);
     return Promise.reject(Object.assign(error, { response }));
   });
 };
 
 export const apiCall = (requestType, url, requestBody, requestParams) => {
   let headers = { ...basicHeader };
-  
+
   const requestOptions = {
     method: requestType,
     headers,

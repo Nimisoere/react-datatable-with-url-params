@@ -19,10 +19,7 @@ function getAllApplications() {
         const error = response.error;
         dispatch(failure(error));
         dispatch(
-          alertActions.error(
-            error ? error.message : message.GENERIC_ERROR,
-            message.LOAD_APPLICATIONS
-          )
+          alertActions.error(message.GENERIC_ERROR, message.LOAD_APPLICATIONS)
         );
       }
     } catch (error) {
