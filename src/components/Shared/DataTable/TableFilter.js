@@ -49,14 +49,12 @@ class TableFilter extends Component {
   };
 
   setFilterState = data => {
-    this.setState({
-      filterState: data
-    });
+    this.props.setFilterState(data);
   };
 
   render() {
-    const { columns, loading } = this.props;
-    const { filters, filterState } = this.state;
+    const { columns, loading, filterState } = this.props;
+    const { filters } = this.state;
     const fiterParams = columns.filter(column => column.filterable === true);
 
     return (

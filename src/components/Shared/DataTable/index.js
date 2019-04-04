@@ -14,12 +14,82 @@ export default class DataTable extends React.Component {
     pageSize: 10,
     pageNumber: 1,
     numberOfPages: null,
+    filterState: null,
     sort: {
       column: null,
       direction: "desc"
     },
     filterQueryString: "",
     sortQueryString: ""
+  };
+
+  componentDidMount() {
+    const filterAndSortParams = this.handleQueryString(window.location.search);
+    let stateUpdate = {};
+    if (filterAndSortParams && filterAndSortParams.filter) {
+      stateUpdate = {
+        ...stateUpdate,
+        filterState: filterAndSortParams.filter
+      };
+    }
+    if (filterAndSortParams && filterAndSortParams.sort) {
+      const columnObject = this.props.columns.find(
+        column => column.accessor === filterAndSortParams.sort.column
+      );
+      const sortObject = {
+        column: columnObject,
+        direction: filterAndSortParams.sort.direction
+      };
+      stateUpdate = {
+        ...stateUpdate,
+        sort: sortObject
+      };
+    }
+    this.setState(
+      {
+        ...stateUpdate
+      },
+      () => this.applyFilterAndSortFromParams(this.state)
+    );
+  }
+
+  applyFilterAndSortFromParams = stateObject => {
+    if (stateObject.filterState) {
+      this.handleFilter(stateObject.filterState);
+    }
+    if (stateObject.sort.column) {
+      this.handleSort(stateObject.sort.column);
+    }
+  };
+
+  handleQueryString = queryString => {
+    let queryObjects = {};
+    if (queryString) {
+      const splitStrings = queryString.split("&&");
+      if (splitStrings.length) {
+        splitStrings.forEach(strings => {
+          const stringSplit = strings.split(":");
+          const queryObject = this.queryStringToObject(stringSplit[1]);
+          queryObjects[
+            stringSplit[0].includes("?")
+              ? stringSplit[0].substring(1)
+              : stringSplit[0]
+          ] = queryObject;
+        });
+      }
+    }
+    return queryObjects;
+  };
+
+  queryStringToObject = queryString => {
+    return JSON.parse(
+      '{"' +
+        decodeURI(queryString)
+          .replace(/"/g, '\\"')
+          .replace(/&/g, '","')
+          .replace(/=/g, '":"') +
+        '"}'
+    );
   };
 
   getNumberOfPages = (pageSize, count) => {
@@ -175,7 +245,6 @@ export default class DataTable extends React.Component {
     const sortedData = this.state.allData.sort(
       this.compareValues(column, direction)
     );
-
     this.setState(
       previousState => {
         return {
@@ -228,11 +297,11 @@ export default class DataTable extends React.Component {
 
     if (type === "filter") {
       stateUpdate = {
-        sortQueryString: queryString ? `filter&&${queryString}` : ""
+        filterQueryString: queryString ? `filter:${queryString}` : ""
       };
     } else if (type === "sort") {
       stateUpdate = {
-        filterQueryString: queryString ? `sort&&${queryString}` : ""
+        sortQueryString: queryString ? `sort:${queryString}` : ""
       };
     }
 
@@ -286,6 +355,12 @@ export default class DataTable extends React.Component {
     );
   };
 
+  setFilterState = data => {
+    this.setState({
+      filterState: data
+    });
+  };
+
   render() {
     const {
       columns,
@@ -308,8 +383,10 @@ export default class DataTable extends React.Component {
       numberOfPages,
       pageData,
       sort,
+      filterState,
       allData
     } = this.state;
+
     const count = allData.length;
     return (
       <div>
@@ -329,6 +406,8 @@ export default class DataTable extends React.Component {
           loading={loading}
           filterData={this.handleFilter}
           columns={columns}
+          filterState={filterState}
+          setFilterState={this.setFilterState}
         />
 
         <TableComponent
