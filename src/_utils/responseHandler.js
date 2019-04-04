@@ -1,7 +1,7 @@
 import { message } from "../_constants";
 
 
-const createUrlParams = params => {
+export const createUrlParams = params => {
   const esc = encodeURIComponent;
   const query = Object.keys(params)
     .map(k => esc(k) + "=" + esc(params[k]))

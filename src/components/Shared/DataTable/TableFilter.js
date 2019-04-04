@@ -17,10 +17,9 @@ import { MdCancel } from "react-icons/md";
 import FilterInput from "../Form/FilterInput";
 
 class TableFilter extends Component {
-  state = { filters: [] };
+  state = { filters: [], filterState: null };
 
   addFilter = param => {
-    console.log(this.state.filters.includes(param))
     if (!this.state.filters.includes(param)) {
       this.setState({
         filters: [...this.state.filters, param]
@@ -28,19 +27,42 @@ class TableFilter extends Component {
     }
   };
 
+  removeRow = index => {
+    const { filters } = this.state;
+    const filteredItems = filters
+      .slice(0, index)
+      .concat(filters.slice(index + 1, filters.length));
+    this.setState(
+      {
+        filters: filteredItems
+      },
+      () => {
+        if (!this.state.filters.length) {
+          this.handleSubmit({});
+        }
+      }
+    );
+  };
+
   handleSubmit = data => {
     this.props.filterData(data);
   };
 
+  setFilterState = data => {
+    this.setState({
+      filterState: data
+    });
+  };
+
   render() {
-    const { columns } = this.props;
-    const { filters } = this.state;
+    const { columns, loading } = this.props;
+    const { filters, filterState } = this.state;
     const fiterParams = columns.filter(column => column.filterable === true);
 
     return (
       <Card className="mb-3">
         <CardBody>
-          {fiterParams && fiterParams.length ? (
+          {fiterParams && fiterParams.length && !loading ? (
             <UncontrolledDropdown>
               <DropdownToggle className="btn-sm" caret>
                 Filter by
@@ -64,6 +86,7 @@ class TableFilter extends Component {
             onValidSubmit={this.handleSubmit}
             onValid={this.enableButton}
             onInvalid={this.disableButton}
+            onChange={this.setFilterState}
             noValidate
           >
             {filters.map((filter, index) => (
@@ -75,9 +98,13 @@ class TableFilter extends Component {
                   type={!!filter.filterOptions && "select"}
                   options={filter.filterOptions}
                   name={filter.accessor}
+                  value={filterState && filterState[filter.accessor]}
                 />
                 <InputGroupAddon addonType="append">
-                  <Button color="secondary">
+                  <Button
+                    color="secondary"
+                    onClick={() => this.removeRow(index)}
+                  >
                     <MdCancel />
                   </Button>
                 </InputGroupAddon>

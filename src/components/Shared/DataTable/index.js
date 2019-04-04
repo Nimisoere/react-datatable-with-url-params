@@ -5,6 +5,7 @@ import { message } from "../../../_constants";
 import Paginator from "./Paginator";
 import { TableHeader } from "./TableHeader";
 import TableFilter from "./TableFilter";
+import { createUrlParams } from "../../../_utils";
 
 export default class DataTable extends React.Component {
   state = {
@@ -16,7 +17,9 @@ export default class DataTable extends React.Component {
     sort: {
       column: null,
       direction: "desc"
-    }
+    },
+    filterQueryString: "",
+    sortQueryString: ""
   };
 
   getNumberOfPages = (pageSize, count) => {
@@ -185,8 +188,15 @@ export default class DataTable extends React.Component {
         };
       },
       () => {
-        const { pageNumber, pageSize, allData } = this.state;
+        const { pageNumber, pageSize, allData, sort } = this.state;
         this.updatePage(pageNumber, pageSize, allData);
+        this.appendSearchParams(
+          createUrlParams({
+            column: sort.column.accessor,
+            direction: sort.direction
+          }),
+          "sort"
+        );
       }
     );
   };
@@ -196,11 +206,49 @@ export default class DataTable extends React.Component {
     return obj;
   };
 
+  createQueryString = () => {
+    const { filterQueryString, sortQueryString } = this.state;
+    const queryString = `${sortQueryString || filterQueryString ? "?" : ""}${
+      sortQueryString ? sortQueryString : ""
+    }${sortQueryString && filterQueryString ? "&&" : ""}${
+      filterQueryString ? filterQueryString : ""
+    }`;
+
+    const newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname +
+      queryString;
+    window.history.replaceState({ path: newurl }, "", newurl);
+  };
+
+  appendSearchParams = (queryString, type) => {
+    let stateUpdate;
+
+    if (type === "filter") {
+      stateUpdate = {
+        sortQueryString: queryString ? `filter&&${queryString}` : ""
+      };
+    } else if (type === "sort") {
+      stateUpdate = {
+        filterQueryString: queryString ? `sort&&${queryString}` : ""
+      };
+    }
+
+    this.setState(
+      {
+        ...stateUpdate
+      },
+      () => this.createQueryString()
+    );
+  };
+
   handleFilter = data => {
     const filterObject = this.cleanObject(data);
     const filterKeys = Object.keys(filterObject);
     const allData = this.props.data ? this.props.data.data : [];
-    const filteredData = allData.filter(row => {
+    let filteredData = allData.filter(row => {
       return filterKeys.every(eachKey => {
         if (!filterObject[eachKey].length) {
           return true;
@@ -212,6 +260,13 @@ export default class DataTable extends React.Component {
           .includes(filterObject[eachKey].toString().toLowerCase());
       });
     });
+
+    if (this.state.sort.column && this.state.sort.direction) {
+      filteredData = filteredData.sort(
+        this.compareValues(this.state.sort.column, this.state.sort.direction)
+      );
+    }
+
     this.setState(
       previousState => {
         return {
@@ -226,6 +281,7 @@ export default class DataTable extends React.Component {
       () => {
         const { pageNumber, pageSize, allData } = this.state;
         this.updatePage(pageNumber, pageSize, allData);
+        this.appendSearchParams(createUrlParams(filterObject), "filter");
       }
     );
   };
@@ -269,7 +325,11 @@ export default class DataTable extends React.Component {
           <Alert color="danger">{message.OUTDATED_DATA}</Alert>
         ) : null}
 
-        <TableFilter filterData={this.handleFilter} columns={columns} />
+        <TableFilter
+          loading={loading}
+          filterData={this.handleFilter}
+          columns={columns}
+        />
 
         <TableComponent
           columns={columns}
