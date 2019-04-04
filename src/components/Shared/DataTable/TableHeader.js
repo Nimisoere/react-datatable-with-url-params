@@ -1,17 +1,11 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
 import { MdAutorenew } from "react-icons/md";
+import PropTypes from "prop-types";
 
 import { Spinner } from "../../Shared";
 export const TableHeader = ({ ...props }) => {
-  const {
-    loading,
-    countName,
-    count,
-    loadData,
-    pageSize,
-    pageNumber
-  } = props;
+  const { loading, countName, count, loadData, pageSize, pageNumber } = props;
   const pageStart = (pageNumber || 1) * pageSize - (pageSize - 1);
   const pageEnd = Math.min(pageStart + pageSize - 1, count);
   return (
@@ -43,4 +37,13 @@ export const TableHeader = ({ ...props }) => {
       </Col>
     </Row>
   );
+};
+
+TableHeader.propTypes = {
+  loading: PropTypes.bool,
+  countName: PropTypes.string,
+  count: PropTypes.number,
+  loadData: PropTypes.func,
+  pageSize: PropTypes.number,
+  pageNumber: PropTypes.number
 };

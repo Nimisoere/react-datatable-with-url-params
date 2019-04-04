@@ -1,5 +1,7 @@
 import React from "react";
 import { Alert } from "reactstrap";
+import PropTypes from "prop-types";
+
 import TableComponent from "./Table";
 import { message } from "../../../_constants";
 import Paginator from "./Paginator";
@@ -437,3 +439,17 @@ export default class DataTable extends React.Component {
     );
   }
 }
+
+DataTable.propTypes = {
+  columns: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
+  data: PropTypes.object,
+  count: PropTypes.number,
+  countName: PropTypes.string,
+  defaultPageSize: PropTypes.number,
+  error: PropTypes.object,
+  bordered: PropTypes.bool,
+  striped: PropTypes.bool,
+  hover: PropTypes.bool,
+  responsive: PropTypes.bool
+};

@@ -71,7 +71,11 @@ export default class TableComponent extends React.Component {
       ) : (
         <tr>
           <td colSpan={columns.length} align="center">
-            {loading ? <Spinner size="10rem" /> : <h4 className="font-weight-bold">No results found</h4>}
+            {loading ? (
+              <Spinner size="10rem" />
+            ) : (
+              <h4 className="font-weight-bold">No results found</h4>
+            )}
           </td>
         </tr>
       );
@@ -118,10 +122,12 @@ const styles = StyleSheet.create({
 });
 
 Table.propTypes = {
-  // Pass in a Component to override default element
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   columns: PropTypes.array,
   data: PropTypes.array,
+  loading: PropTypes.bool,
+  sort: PropTypes.func,
+  sortState: PropTypes.object,
   size: PropTypes.string,
   bordered: PropTypes.bool,
   borderless: PropTypes.bool,
@@ -129,7 +135,6 @@ Table.propTypes = {
   dark: PropTypes.bool,
   hover: PropTypes.bool,
   responsive: PropTypes.bool,
-  // Custom ref handler that will be assigned to the "ref" of the inner <table> element
   innerRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string,

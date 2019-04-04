@@ -2,6 +2,7 @@ import { withFormsy, propTypes } from "formsy-react";
 import React from "react";
 import { Input } from "reactstrap";
 import { StyleSheet, css } from "aphrodite";
+import PropTypes from "prop-types";
 
 export class FilterInput extends React.Component {
   changeValue = event => {
@@ -68,7 +69,11 @@ const styles = StyleSheet.create({
 });
 
 FilterInput.propTypes = {
-  ...propTypes
+  ...propTypes,
+  type: PropTypes.string,
+  options: PropTypes.array,
+  name: PropTypes.string,
+  value: PropTypes.any
 };
 
 export default withFormsy(FilterInput);

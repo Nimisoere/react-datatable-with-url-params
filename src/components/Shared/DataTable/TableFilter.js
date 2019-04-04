@@ -4,9 +4,7 @@ import {
   CardBody,
   InputGroup,
   InputGroupAddon,
-  Button
-} from "reactstrap";
-import {
+  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -14,10 +12,12 @@ import {
 } from "reactstrap";
 import Formsy from "formsy-react";
 import { MdCancel } from "react-icons/md";
+import PropTypes from "prop-types";
+
 import FilterInput from "../Form/FilterInput";
 
 class TableFilter extends Component {
-  state = { filters: [], filterState: null };
+  state = { filters: [] };
 
   addFilter = param => {
     if (!this.state.filters.includes(param)) {
@@ -121,5 +121,13 @@ class TableFilter extends Component {
     );
   }
 }
+
+TableFilter.propTypes = {
+  loading: PropTypes.bool,
+  columns: PropTypes.array.isRequired,
+  filterState: PropTypes.object,
+  filterData: PropTypes.func.isRequired,
+  setFilterState: PropTypes.func.isRequired
+};
 
 export default TableFilter;

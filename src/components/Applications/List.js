@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import DataTable from "../Shared/DataTable";
 import { MdLens } from "react-icons/md";
 import { appConstants } from "../../_constants";
+
 const calculateAge = dob => {
   const today = new Date();
   const birthDate = new Date(dob);
@@ -66,9 +67,9 @@ export const ApplicationsList = ({ ...props }) => {
       accessor: "status",
       filterable: true,
       filterOptions: [
-        {value: appConstants.APPLICATION_STATUS.APPROVED, label: "Approved"},
-        {value: appConstants.APPLICATION_STATUS.WAITING, label: "Waiting"},
-        {value: appConstants.APPLICATION_STATUS.REJECTED, label: "Rejected"}
+        { value: appConstants.APPLICATION_STATUS.APPROVED, label: "Approved" },
+        { value: appConstants.APPLICATION_STATUS.WAITING, label: "Waiting" },
+        { value: appConstants.APPLICATION_STATUS.REJECTED, label: "Rejected" }
       ],
       Cell: row => {
         switch (row.status) {
@@ -105,7 +106,7 @@ export const ApplicationsList = ({ ...props }) => {
         data={data}
         count={dataCount}
         countName="Applications"
-        defaultPageSize="10"
+        defaultPageSize={10}
         loadData={loadData}
         error={error}
         bordered={true}

@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
   }
 });
 
+CustomNavBar.propTypes = {
+  appName: PropTypes.string
+};
+
 Navbar.propTypes = {
   light: PropTypes.bool,
   dark: PropTypes.bool,

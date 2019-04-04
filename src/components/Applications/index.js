@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
-
+import PropTypes from "prop-types";
 import { Route, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -24,7 +24,6 @@ export class ManageApplications extends Component {
 
   render() {
     const { fetching, fetched, response, error, match } = this.props;
-
     return (
       <div className="applications" id="applications">
         <PageHeader pageId="applications" pageTitle="Manage Applications" />
@@ -54,6 +53,17 @@ export class ManageApplications extends Component {
     );
   }
 }
+
+ManageApplications.propTypes = {
+  error: PropTypes.object,
+  fetched: PropTypes.bool,
+  fetching: PropTypes.bool,
+  getApplications: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  response: PropTypes.object
+};
 
 const mapStateToProps = state => {
   const { fetching, fetched, response, error } = state.applications;

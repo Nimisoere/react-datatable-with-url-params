@@ -88,7 +88,7 @@ ShallowWrapper {
         count={0}
         countName="Applications"
         data={Object {}}
-        defaultPageSize="10"
+        defaultPageSize={10}
         error={Object {}}
         hover={true}
         loadData={[MockFunction]}
@@ -164,7 +164,7 @@ ShallowWrapper {
         "count": 0,
         "countName": "Applications",
         "data": Object {},
-        "defaultPageSize": "10",
+        "defaultPageSize": 10,
         "error": Object {},
         "hover": true,
         "loadData": [MockFunction],
@@ -248,7 +248,7 @@ ShallowWrapper {
           count={0}
           countName="Applications"
           data={Object {}}
-          defaultPageSize="10"
+          defaultPageSize={10}
           error={Object {}}
           hover={true}
           loadData={[MockFunction]}
@@ -324,7 +324,7 @@ ShallowWrapper {
           "count": 0,
           "countName": "Applications",
           "data": Object {},
-          "defaultPageSize": "10",
+          "defaultPageSize": 10,
           "error": Object {},
           "hover": true,
           "loadData": [MockFunction],

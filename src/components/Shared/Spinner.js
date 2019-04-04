@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./spinner.scss";
 
 export const Spinner = ({ float, size, message, className }) => (
@@ -10,3 +12,10 @@ export const Spinner = ({ float, size, message, className }) => (
     {message && <span className="_primary-text ml-3">{message}</span>}
   </div>
 );
+
+Spinner.propTypes = {
+  float: PropTypes.string,
+  size: PropTypes.string,
+  message: PropTypes.string,
+  className: PropTypes.string
+};

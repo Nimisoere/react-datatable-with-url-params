@@ -1,6 +1,8 @@
 import React from "react";
 import { Container } from "reactstrap";
 import { Seo } from "../Shared";
+import PropTypes from "prop-types";
+
 import { seoObject } from "../../_constants";
 import "./PageHeader.scss";
 
@@ -24,3 +26,9 @@ export const PageHeader = ({ pageId, pageTitle, isBase }) => (
     </Container>
   </div>
 );
+
+PageHeader.propTypes = {
+  pageId: PropTypes.string,
+  pageTitle: PropTypes.string,
+  isBase: PropTypes.bool
+};

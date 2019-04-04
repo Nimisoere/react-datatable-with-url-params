@@ -7,6 +7,8 @@ import {
   Input,
   InputGroupText
 } from "reactstrap";
+import PropTypes from "prop-types";
+
 import { appConstants } from "../../../_constants/app.constants";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
@@ -29,7 +31,6 @@ class Paginator extends Component {
       next,
       prev
     } = this.props;
-
     return (
       <Row className="paginator mb-3">
         <Col sm="3">
@@ -97,5 +98,15 @@ class Paginator extends Component {
     );
   }
 }
+
+Paginator.propTypes = {
+  next: PropTypes.func.isRequired,
+  numberOfPages: PropTypes.number,
+  pageCountChange: PropTypes.func.isRequired,
+  pageNumber: PropTypes.number.isRequired,
+  pageNumberChange: PropTypes.func.isRequired,
+  prev: PropTypes.func.isRequired,
+  recordsPerPage: PropTypes.number.isRequired
+};
 
 export default Paginator;
