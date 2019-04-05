@@ -22,7 +22,7 @@ class TableFilter extends Component {
   componentDidMount() {}
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.filterState) {
+    if (!this.props.filterState && nextProps.filterState) {
       const filterKeys = Object.keys(nextProps.filterState);
       const filters = nextProps.columns.filter(column =>
         filterKeys.includes(column.accessor)
