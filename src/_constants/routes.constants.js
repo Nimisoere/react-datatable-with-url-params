@@ -23,6 +23,10 @@ export const routeConstants = {
   }
 };
 
+
+/*****************
+ Create a mappable array of routes
+**************/
 export const createRoutes = () => {
   const routes = [];
   for (var route in routeConstants) {

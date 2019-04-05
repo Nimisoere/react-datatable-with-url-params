@@ -8,6 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { store, persistor } from "./_utils";
 import App from "./components/App/App";
 
+/*****************
+ Persist Gate used to maintain state in localstrorage
+**************/
+
 render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
