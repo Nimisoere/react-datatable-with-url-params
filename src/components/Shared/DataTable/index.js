@@ -60,11 +60,11 @@ export default class DataTable extends React.Component {
   }
 
   applyFilterAndSortFromParams = stateObject => {
+    if (stateObject.sort.column) {
+      this.handleSort(stateObject.sort.column, this.state.sort.direction);
+    }
     if (stateObject.filterState) {
       this.handleFilter(stateObject.filterState);
-    }
-    if (stateObject.sort.column) {
-      this.handleSort(stateObject.sort.column);
     }
   };
 
@@ -180,8 +180,10 @@ export default class DataTable extends React.Component {
     }
   };
 
-  handleSort = column => {
-    const direction = this.state.sort.column
+  handleSort = (column, defaultDirection) => {
+    const direction = defaultDirection
+      ? defaultDirection
+      : this.state.sort.column
       ? this.state.sort.direction === "desc"
         ? "asc"
         : "desc"

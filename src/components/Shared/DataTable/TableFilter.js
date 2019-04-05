@@ -19,6 +19,20 @@ import FilterInput from "../Form/FilterInput";
 class TableFilter extends Component {
   state = { filters: [] };
 
+  componentDidMount() {}
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.filterState) {
+      const filterKeys = Object.keys(nextProps.filterState);
+      const filters = nextProps.columns.filter(column =>
+        filterKeys.includes(column.accessor)
+      );
+      this.setState({
+        filters
+      });
+    }
+  }
+
   addFilter = param => {
     if (!this.state.filters.includes(param)) {
       this.setState({
@@ -56,7 +70,6 @@ class TableFilter extends Component {
     const { columns, loading, filterState } = this.props;
     const { filters } = this.state;
     const fiterParams = columns.filter(column => column.filterable === true);
-
     return (
       <Card className="mb-3">
         <CardBody>
@@ -93,7 +106,7 @@ class TableFilter extends Component {
                   {filter.name}
                 </InputGroupAddon>
                 <FilterInput
-                  type={!!filter.filterOptions && "select"}
+                  type={filter.filterOptions ? "select" : null}
                   options={filter.filterOptions}
                   name={filter.accessor}
                   value={filterState && filterState[filter.accessor]}
