@@ -8,7 +8,7 @@ ShallowWrapper {
     error={Object {}}
     fetching={false}
     loadData={[MockFunction]}
-    match=""
+    match={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

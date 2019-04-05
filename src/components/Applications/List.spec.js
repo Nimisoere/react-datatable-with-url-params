@@ -7,7 +7,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 function setup() {
   const props = {
-    match: "",
+    match: {},
     fetching: false,
     data: {},
     error: {},

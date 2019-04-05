@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new Adapter() });
 function setup() {
   const props = {
     float: "float-left",
-    size: 20,
+    size: "20px",
     message: "test",
     className: ""
   };

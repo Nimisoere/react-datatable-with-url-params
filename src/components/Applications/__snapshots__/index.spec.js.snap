@@ -20,7 +20,7 @@ ShallowWrapper {
         ],
       }
     }
-    match=""
+    match={Object {}}
     response={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {

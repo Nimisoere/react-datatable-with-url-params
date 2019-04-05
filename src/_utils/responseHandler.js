@@ -1,5 +1,9 @@
 import { message } from "../_constants";
 
+const basicHeader = {
+  "Content-Type": "application/json"
+};
+
 export const createUrlParams = params => {
   const esc = encodeURIComponent;
   const query = Object.keys(params)
@@ -7,10 +11,6 @@ export const createUrlParams = params => {
     .join("&");
 
   return query;
-};
-
-export const basicHeader = {
-  "Content-Type": "application/json"
 };
 
 export const handleResponse = response => {
