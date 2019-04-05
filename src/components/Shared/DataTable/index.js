@@ -26,6 +26,10 @@ export default class DataTable extends React.Component {
   };
 
   componentDidMount() {
+    this.handleQueryString();
+  }
+
+  handleQueryString = () => {
     const filterAndSortParams = urlUtils.handleQueryString(
       window.location.search
     );
@@ -57,7 +61,7 @@ export default class DataTable extends React.Component {
       },
       () => this.applyFilterAndSortFromParams(this.state)
     );
-  }
+  };
 
   applyFilterAndSortFromParams = stateObject => {
     if (stateObject.sort.column) {
@@ -84,8 +88,15 @@ export default class DataTable extends React.Component {
       const page = tableUtils.createPageData(pageNumber, pageSize, data.data);
       stateUpdate = { ...stateUpdate, pageData: page };
     }
+    if (JSON.stringify(this.props.data) !== JSON.stringify(data)) {
+      stateUpdate = { ...stateUpdate, allData: data ? data.data : [] };
+    }
     if (stateUpdate) {
-      this.setState({ ...stateUpdate, allData: data ? data.data : [] });
+      this.setState({ ...stateUpdate }, () => {
+        if (stateUpdate.allData) {
+          this.handleQueryString();
+        }
+      });
     }
   }
 
