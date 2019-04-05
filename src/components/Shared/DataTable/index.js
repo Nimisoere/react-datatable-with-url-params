@@ -15,6 +15,7 @@ export default class DataTable extends React.Component {
     pageData: [],
     pageSize: 10,
     pageNumber: 1,
+    hasParams: false,
     numberOfPages: null,
     filterState: null,
     sort: {
@@ -89,11 +90,11 @@ export default class DataTable extends React.Component {
       stateUpdate = { ...stateUpdate, pageData: page };
     }
     if (JSON.stringify(this.props.data) !== JSON.stringify(data)) {
-      stateUpdate = { ...stateUpdate, allData: data ? data.data : [] };
+      stateUpdate = { ...stateUpdate, hasParams: true };
     }
     if (stateUpdate) {
-      this.setState({ ...stateUpdate }, () => {
-        if (stateUpdate.allData) {
+      this.setState({ ...stateUpdate, allData: data ? data.data : [] }, () => {
+        if (stateUpdate.hasParams) {
           this.handleQueryString();
         }
       });
@@ -318,6 +319,7 @@ export default class DataTable extends React.Component {
       filterState,
       allData
     } = this.state;
+
 
     const count = allData.length;
     return (
