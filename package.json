@@ -2,10 +2,12 @@
   "name": "react-data-table",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nimisoere.github.io/personio-applications",
   "dependencies": {
     "aphrodite": "^2.3.1",
     "bootstrap": "^4.3.1",
     "formsy-react": "^1.1.5",
+    "gh-pages": "^2.0.1",
     "history": "^4.9.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
@@ -26,6 +28,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
