@@ -7,7 +7,7 @@ import { message } from "../../../_constants";
 import Paginator from "./Paginator";
 import { TableHeader } from "./TableHeader";
 import TableFilter from "./TableFilter";
-import { createUrlParams } from "../../../_utils";
+import { createUrlParams, urlUtils, tableUtils } from "../../../_utils";
 
 export default class DataTable extends React.Component {
   state = {
@@ -26,14 +26,18 @@ export default class DataTable extends React.Component {
   };
 
   componentDidMount() {
-    const filterAndSortParams = this.handleQueryString(window.location.search);
+    const filterAndSortParams = urlUtils.handleQueryString(
+      window.location.search
+    );
     let stateUpdate = {};
+
     if (filterAndSortParams && filterAndSortParams.filter) {
       stateUpdate = {
         ...stateUpdate,
         filterState: filterAndSortParams.filter
       };
     }
+
     if (filterAndSortParams && filterAndSortParams.sort) {
       const columnObject = this.props.columns.find(
         column => column.accessor === filterAndSortParams.sort.column
@@ -64,54 +68,20 @@ export default class DataTable extends React.Component {
     }
   };
 
-  handleQueryString = queryString => {
-    let queryObjects = {};
-    if (queryString) {
-      const splitStrings = queryString.split("&&");
-      if (splitStrings.length) {
-        splitStrings.forEach(strings => {
-          const stringSplit = strings.split(":");
-          const queryObject = this.queryStringToObject(stringSplit[1]);
-          queryObjects[
-            stringSplit[0].includes("?")
-              ? stringSplit[0].substring(1)
-              : stringSplit[0]
-          ] = queryObject;
-        });
-      }
-    }
-    return queryObjects;
-  };
-
-  queryStringToObject = queryString => {
-    return JSON.parse(
-      '{"' +
-        decodeURI(queryString)
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"') +
-        '"}'
-    );
-  };
-
-  getNumberOfPages = (pageSize, count) => {
-    return Math.ceil(Number(count) / Number(pageSize));
-  };
-
   componentWillReceiveProps(nextProps) {
     const { count } = this.props;
     const { pageSize, numberOfPages, pageData, pageNumber } = this.state;
     const data = nextProps.data;
     let stateUpdate = null;
     if (count !== nextProps.count || !numberOfPages) {
-      const numberOfPageState = this.getNumberOfPages(
+      const numberOfPageState = tableUtils.getNumberOfPages(
         pageSize,
         nextProps.count
       );
       stateUpdate = { numberOfPages: numberOfPageState };
     }
     if (!pageData.length && data && data.data && data.data.length) {
-      const page = this.createPageData(pageNumber, pageSize, data.data);
+      const page = tableUtils.createPageData(pageNumber, pageSize, data.data);
       stateUpdate = { ...stateUpdate, pageData: page };
     }
     if (stateUpdate) {
@@ -119,14 +89,8 @@ export default class DataTable extends React.Component {
     }
   }
 
-  createPageData = (currentPage, pageSize, allData) => {
-    const offset = ((currentPage || 1) - 1) * pageSize;
-    const pageData = allData.slice(offset, offset + pageSize);
-    return pageData;
-  };
-
   updatePage = (pageNumber, pageSize, allData) => {
-    const pageData = this.createPageData(pageNumber, pageSize, allData);
+    const pageData = tableUtils.createPageData(pageNumber, pageSize, allData);
     this.setState({ pageData });
   };
 
@@ -172,7 +136,10 @@ export default class DataTable extends React.Component {
             ...previousState,
             pageNumber: 1,
             pageSize: value,
-            numberOfPages: Math.ceil(Number(this.state.allData.length / value))
+            numberOfPages: tableUtils.getNumberOfPages(
+              Number(value),
+              Number(this.state.allData.length)
+            )
           };
         }
       },
@@ -213,39 +180,16 @@ export default class DataTable extends React.Component {
     }
   };
 
-  compareValues = (column, order) => {
-    const key = column.accessor;
-    return (a, b) => {
-      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-        return 0;
-      }
-
-      let varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
-      let varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
-
-      if (column.sortType === "date") {
-        varA = new Date(a[key]);
-        varB = new Date(b[key]);
-      }
-
-      let comparison = 0;
-      if (varA > varB) {
-        comparison = 1;
-      } else if (varA < varB) {
-        comparison = -1;
-      }
-      return order === "desc" ? comparison * -1 : comparison;
-    };
-  };
-
   handleSort = column => {
     const direction = this.state.sort.column
       ? this.state.sort.direction === "desc"
         ? "asc"
         : "desc"
       : "asc";
-    const sortedData = this.state.allData.sort(
-      this.compareValues(column, direction)
+    const sortedData = tableUtils.sortData(
+      this.state.allData,
+      column,
+      direction
     );
     this.setState(
       previousState => {
@@ -261,7 +205,7 @@ export default class DataTable extends React.Component {
       () => {
         const { pageNumber, pageSize, allData, sort } = this.state;
         this.updatePage(pageNumber, pageSize, allData);
-        this.appendSearchParams(
+        this.createQueryParams(
           createUrlParams({
             column: sort.column.accessor,
             direction: sort.direction
@@ -272,29 +216,7 @@ export default class DataTable extends React.Component {
     );
   };
 
-  cleanObject = obj => {
-    Object.keys(obj).forEach(key => !obj[key] && delete obj[key]);
-    return obj;
-  };
-
-  createQueryString = () => {
-    const { filterQueryString, sortQueryString } = this.state;
-    const queryString = `${sortQueryString || filterQueryString ? "?" : ""}${
-      sortQueryString ? sortQueryString : ""
-    }${sortQueryString && filterQueryString ? "&&" : ""}${
-      filterQueryString ? filterQueryString : ""
-    }`;
-
-    const newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname +
-      queryString;
-    window.history.replaceState({ path: newurl }, "", newurl);
-  };
-
-  appendSearchParams = (queryString, type) => {
+  createQueryParams = (queryString, type) => {
     let stateUpdate;
 
     if (type === "filter") {
@@ -311,30 +233,22 @@ export default class DataTable extends React.Component {
       {
         ...stateUpdate
       },
-      () => this.createQueryString()
+      () => {
+        const { filterQueryString, sortQueryString } = this.state;
+        tableUtils.implementQueryString(filterQueryString, sortQueryString);
+      }
     );
   };
 
   handleFilter = data => {
-    const filterObject = this.cleanObject(data);
-    const filterKeys = Object.keys(filterObject);
     const allData = this.props.data ? this.props.data.data : [];
-    let filteredData = allData.filter(row => {
-      return filterKeys.every(eachKey => {
-        if (!filterObject[eachKey].length) {
-          return true;
-        }
-
-        return row[eachKey]
-          .toString()
-          .toLowerCase()
-          .includes(filterObject[eachKey].toString().toLowerCase());
-      });
-    });
+    let filteredData = tableUtils.filterData(allData, data);
 
     if (this.state.sort.column && this.state.sort.direction) {
-      filteredData = filteredData.sort(
-        this.compareValues(this.state.sort.column, this.state.sort.direction)
+      filteredData = tableUtils.sortData(
+        filteredData,
+        this.state.sort.column,
+        this.state.sort.direction
       );
     }
 
@@ -343,7 +257,7 @@ export default class DataTable extends React.Component {
         return {
           ...previousState,
           allData: filteredData,
-          numberOfPages: this.getNumberOfPages(
+          numberOfPages: tableUtils.getNumberOfPages(
             this.state.pageSize,
             filteredData.length
           )
@@ -352,7 +266,10 @@ export default class DataTable extends React.Component {
       () => {
         const { pageNumber, pageSize, allData } = this.state;
         this.updatePage(pageNumber, pageSize, allData);
-        this.appendSearchParams(createUrlParams(filterObject), "filter");
+        this.createQueryParams(
+          createUrlParams(tableUtils.cleanObject(data)),
+          "filter"
+        );
       }
     );
   };

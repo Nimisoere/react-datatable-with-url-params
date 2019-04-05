@@ -4,8 +4,14 @@ import { MdAutorenew } from "react-icons/md";
 import PropTypes from "prop-types";
 
 import { Spinner } from "../../Shared";
-export const TableHeader = ({ ...props }) => {
-  const { loading, countName, count, loadData, pageSize, pageNumber } = props;
+export const TableHeader = ({
+  loading,
+  countName,
+  count,
+  loadData,
+  pageSize,
+  pageNumber
+}) => {
   const pageStart = (pageNumber || 1) * pageSize - (pageSize - 1);
   const pageEnd = Math.min(pageStart + pageSize - 1, count);
   return (
@@ -13,7 +19,7 @@ export const TableHeader = ({ ...props }) => {
       <Col sm="6">
         <h5 className="item-count">
           {loading
-            ? `Fetching ${countName}...`
+            ? `Fetching ${countName || "Result(s)"}...`
             : `Showing ${pageStart} to ${pageEnd} of ${count} ${countName ||
                 "Result(s)"}`}
         </h5>

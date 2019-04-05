@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import PropTypes from "prop-types";
 import { Route, Switch } from "react-router-dom";
-
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import { ApplicationsList } from "./List";
 import NotFound from "../NotFound";
-
 import { PageHeader } from "../Shared";
-
 import { applicationActions } from "./actions/applications.actions";
 
 export class ManageApplications extends Component {

@@ -3,17 +3,7 @@ import PropTypes from "prop-types";
 import DataTable from "../Shared/DataTable";
 import { MdLens } from "react-icons/md";
 import { appConstants } from "../../_constants";
-
-const calculateAge = dob => {
-  const today = new Date();
-  const birthDate = new Date(dob);
-  let age = today.getFullYear() - birthDate.getFullYear();
-  var m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
-};
+import { dateUtils } from "../../_utils";
 
 export const ApplicationsList = ({ ...props }) => {
   const { fetching, data, loadData, error } = props;
@@ -40,7 +30,8 @@ export const ApplicationsList = ({ ...props }) => {
       Cell: row => {
         return (
           <div>
-            {row.birth_date} <strong>({calculateAge(row.birth_date)})</strong>
+            {row.birth_date}{" "}
+            <strong>({dateUtils.calculateAge(row.birth_date)})</strong>
           </div>
         );
       }

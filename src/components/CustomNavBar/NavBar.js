@@ -32,10 +32,8 @@ Navbar.propTypes = {
   role: PropTypes.string,
   expand: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-  // pass in custom element to use
 };
 
 NavbarBrand.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-  // pass in custom element to use
 };

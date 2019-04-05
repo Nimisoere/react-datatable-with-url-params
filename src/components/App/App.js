@@ -24,12 +24,14 @@ export class App extends Component {
     toast[type || "info"](
       <div>
         <p>
-          <span className="bold">{section}:</span> {message}
+          <span className="font-weight-bold">{section}:</span>
+          <br /> {message}
         </p>
       </div>
     );
     this.props.clearAlerts();
   };
+  
   render() {
     const { message } = this.props;
     if (message) {
